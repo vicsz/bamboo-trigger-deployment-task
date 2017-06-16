@@ -25,16 +25,11 @@ public class MyFirstTask implements TaskType {
 
         final BuildLogger buildLogger = taskContext.getBuildLogger();
 
-        final String say = taskContext.getConfigurationMap().get("say");
+        PlanKey parentPlanKey = taskContext.getBuildContext().getParentBuildContext().getTypedPlanKey();
 
-        PlanKey planKey = taskContext.getBuildContext().getTypedPlanKey();
+        buildLogger.addBuildLogEntry("Parent plan key is " + parentPlanKey);
 
-        buildLogger.addBuildLogEntry(deploymentProjectService.getAllDeploymentProjects().get(0).toString());
-        buildLogger.addBuildLogEntry(deploymentProjectService.getAllDeploymentProjects().get(0).getEnvironments().toString());
-
-        buildLogger.addBuildLogEntry(deploymentProjectService.getAllDeploymentProjects().toString());
-
-        buildLogger.addBuildLogEntry("Hello, World! " + say + " " + deploymentProjectService.getDeploymentProjectsRelatedToPlan(planKey));
+        buildLogger.addBuildLogEntry("Related Plan keys " + deploymentProjectService.getDeploymentProjectsRelatedToPlan(parentPlanKey));
 
         return TaskResultBuilder.newBuilder(taskContext).success().build();
     }
