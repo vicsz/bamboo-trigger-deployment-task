@@ -20,5 +20,9 @@
 
         <context>deploy-task</context>
     </web-resource>
+
+    <taskType key="myFirstTask" name="My First Task" class="com.bambooplugin.impl.MyFirstTask">
+        <description>A task that prints 'Hello, World!'</description>
+    </taskType>
     
 </atlassian-plugin>

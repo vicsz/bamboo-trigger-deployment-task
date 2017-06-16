@@ -11,3 +11,17 @@ Here are the SDK commands you'll use immediately:
 Full documentation is always available at:
 
 https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK
+
+
+## Working with Intellij
+
+1. Import project into Intellij using the pox.xml
+2. Run atlas-run once to pull down dependencies ..
+2. Add /target/bamboo/webapp/WEB-INF/lib to project structure libraries to resolve missing dependecies.
+
+## Development
+
+Starting up Sample Bamboo with your Plugin
+1. Run #atlas-run
+2. Go to : localhost:6990/bamboo
+3. Default username / password is admin/admin
