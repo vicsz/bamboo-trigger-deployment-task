@@ -23,6 +23,8 @@
 
     <taskType key="myFirstTask" name="My First Task" class="com.bambooplugin.impl.MyFirstTask">
         <description>A task that prints 'Hello, World!'</description>
+        <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
+        <configuration class="com.bambooplugin.impl.MyFirstTaskConfigurator"/>
     </taskType>
     
 </atlassian-plugin>
