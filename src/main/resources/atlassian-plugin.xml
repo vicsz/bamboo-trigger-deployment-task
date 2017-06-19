@@ -21,10 +21,10 @@
         <context>deploy-task</context>
     </web-resource>
 
-    <taskType key="myFirstTask" name="My First Task" class="com.bambooplugin.impl.MyFirstTask">
+    <taskType key="myFirstTask" name="My First Task" class="com.bambooplugin.impl.DeployTask">
         <description>A task that prints 'Hello, World!'</description>
-        <resource type="freemarker" name="edit" location="editExampleTask.ftl"/>
-        <configuration class="com.bambooplugin.impl.MyFirstTaskConfigurator"/>
+        <resource type="freemarker" name="edit" location="editDeployTask.ftl"/>
+        <configuration class="com.bambooplugin.impl.DeployTaskConfigurator"/>
     </taskType>
     
 </atlassian-plugin>
