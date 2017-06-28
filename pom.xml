@@ -6,16 +6,16 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bambooplugin</groupId>
-    <artifactId>deploy-task</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>deployment-trigger-task</artifactId>
+    <version>0.0.1</version>
 
     <organization>
-        <name>Example Company</name>
+        <name>Victor Sz</name>
         <url>http://www.example.com/</url>
     </organization>
 
-    <name>deploy-task</name>
-    <description>This is the com.bambooplugin:deploy-task plugin for Atlassian Bamboo.</description>
+    <name>Deployment Trigger Task</name>
+    <description>This plugin allows Triggering of Deployments from Builds.</description>
     <packaging>atlassian-plugin</packaging>
 
     <properties>

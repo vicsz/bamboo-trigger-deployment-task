@@ -8,10 +8,10 @@
     </plugin-info>
 
     <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="deploy-task"/>
+    <resource type="i18n" name="i18n" location="deployment-trigger-task"/>
     
     <!-- add our web resources -->
-    <web-resource key="deploy-task-resources" name="deploy-task Web Resources">
+    <web-resource key="deployment-trigger-task-resources" name="deployment-trigger-task Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         
         <resource type="download" name="deploy-task.css" location="/css/deploy-task.css"/>
@@ -21,8 +21,8 @@
         <context>deploy-task</context>
     </web-resource>
 
-    <taskType key="myFirstTask" name="Deployment Trigger Task" class="com.bambooplugin.impl.DeploymentTriggerTask">
-        <description>A task that prints 'Hello, World!'</description>
+    <taskType key="deployTask" name="Deployment Trigger Task" class="com.bambooplugin.impl.DeploymentTriggerTask">
+        <description>This tasks also Deployment Triggering of related Deployment plans.</description>
         <resource type="freemarker" name="edit" location="editDeployTask.ftl"/>
         <configuration class="com.bambooplugin.impl.DeploymentTriggerTaskConfigurator"/>
     </taskType>
