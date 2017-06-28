@@ -13,10 +13,8 @@ import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 @Scanned
-public class DeployTask implements TaskType {
+public class DeploymentTriggerTask implements TaskType {
 
     @ComponentImport
     private final DeploymentProjectService deploymentProjectService;
@@ -28,9 +26,9 @@ public class DeployTask implements TaskType {
     private final NonBlockingPlanExecutionService nonBlockingPlanExecutionService;
 
     @Autowired
-    public DeployTask(@ComponentImport DeploymentProjectService deploymentProjectService,
-                      @ComponentImport EnvironmentTriggeringActionFactory triggeringActionFactory,
-                      @ComponentImport NonBlockingPlanExecutionService nonBlockingPlanExecutionService)
+    public DeploymentTriggerTask(@ComponentImport DeploymentProjectService deploymentProjectService,
+                                 @ComponentImport EnvironmentTriggeringActionFactory triggeringActionFactory,
+                                 @ComponentImport NonBlockingPlanExecutionService nonBlockingPlanExecutionService)
     {
         this.deploymentProjectService = deploymentProjectService;
         this.triggeringActionFactory = triggeringActionFactory;

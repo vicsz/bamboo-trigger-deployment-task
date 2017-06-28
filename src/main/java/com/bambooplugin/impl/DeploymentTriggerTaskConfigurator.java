@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Map;
 
-public class DeployTaskConfigurator extends AbstractTaskConfigurator {
+public class DeploymentTriggerTaskConfigurator extends AbstractTaskConfigurator {
 
     @ComponentImport
     private final DeploymentProjectService deploymentProjectService;
 
 
     @Autowired
-    public DeployTaskConfigurator(@ComponentImport DeploymentProjectService deploymentProjectService) {
+    public DeploymentTriggerTaskConfigurator(@ComponentImport DeploymentProjectService deploymentProjectService) {
         this.deploymentProjectService = deploymentProjectService;
     }
 
