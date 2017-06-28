@@ -1,3 +1,9 @@
+
+[![Build Status](https://travis-ci.org/vicsz/bamboo-trigger-deployment-task.svg?branch=master)](https://travis-ci.org/vicsz/bamboo-trigger-deployment-task)
+
+Bamboo Deployment Trigger Plugin
+- Updated for latest Version of Bamboo 6.0
+
 You have successfully created an Atlassian Plugin!
 
 Here are the SDK commands you'll use immediately:
