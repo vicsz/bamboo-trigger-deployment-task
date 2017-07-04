@@ -13,6 +13,8 @@ import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Scanned
 public class DeploymentTriggerTask implements TaskType {
 
@@ -43,19 +45,26 @@ public class DeploymentTriggerTask implements TaskType {
 
         try {
 
-            long deploymentProjectId, environmentId;
+            String environmentName = taskContext.getConfigurationMap().get("environmentName");
 
-            deploymentProjectId = Long.parseLong(taskContext.getConfigurationMap().get("deploymentProjectId"));
-            environmentId = Long.parseLong(taskContext.getConfigurationMap().get("environmentId"));
+            List<DeploymentProject> relatedDeploymentProjects = deploymentProjectService.getDeploymentProjectsRelatedToPlanOrBranches(taskContext.getBuildContext().getParentBuildContext().getTypedPlanKey());
 
-            DeploymentProject deploymentProject = deploymentProjectService.getDeploymentProject(deploymentProjectId);
-            Environment environment = getMatchingEnvironment(deploymentProject, environmentId);
             PlanResultKey planResultKey = taskContext.getBuildContext().getParentBuildContext().getPlanResultKey();
 
-            buildLogger.addBuildLogEntry("Starting Deployment of " + planResultKey + " to " + deploymentProject.getName() + " / " + environment.getName());
+            for (DeploymentProject deploymentProject: relatedDeploymentProjects) {
+                Environment environment = getMatchingEnvironment(deploymentProject, environmentName);
 
-            EnvironmentTriggeringAction environmentTriggeringAction = triggeringActionFactory.createAfterSuccessfulPlanEnvironmentTriggerAction(environment, planResultKey);
-            nonBlockingPlanExecutionService.tryToStart(environment, environmentTriggeringAction);
+                if(environment == null) {
+                    buildLogger.addErrorLogEntry("Skipping Deployment of " + planResultKey + " to " + deploymentProject.getName() + ".  No environment called " + environment.getName());
+                    continue;
+                }
+
+                buildLogger.addBuildLogEntry("Starting Deployment of " + planResultKey + " to " + deploymentProject.getName() + " / " + environment.getName());
+
+                EnvironmentTriggeringAction environmentTriggeringAction = triggeringActionFactory.createAfterSuccessfulPlanEnvironmentTriggerAction(environment, planResultKey);
+                nonBlockingPlanExecutionService.tryToStart(environment, environmentTriggeringAction);
+
+            }
 
             return TaskResultBuilder.newBuilder(taskContext).success().build();
 
@@ -68,14 +77,14 @@ public class DeploymentTriggerTask implements TaskType {
 
     }
 
-    private Environment getMatchingEnvironment(DeploymentProject deploymentProject, long id) {
+    private Environment getMatchingEnvironment(DeploymentProject deploymentProject, String environmentName) {
 
         for (Environment environment : deploymentProject.getEnvironments()) {
-            if(environment.getId() == id)
+            if(environment.getName().equals(environmentName))
                 return environment;
         }
 
-        throw new RuntimeException("Unable to find environment id: " + id);
+       return null;
     }
 
 }
